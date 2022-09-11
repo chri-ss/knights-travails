@@ -52,15 +52,19 @@ const bfs = (node, end) => {
 };
 
 const knightMoves = (start, end) => {
+  if (end[0] > 7 || end[0] < 0 || end[1] > 7 || end[1] < 0) {
+    return "Out of range, please enter start and end points between [0, 0] and [7, 7]";
+  }
   q.push(Node(start));
   let path = bfs(q[0], end);
   const output = [];
   output.push(path.value);
   while (path.prev !== null) {
-    output.push(path.prev.value);
+    output.unshift(path.prev.value);
     path = path.prev;
   }
-  return output;
+  console.log("Here is your path from " + start + " to " + end);
+  output.forEach((move) => console.log(move));
 };
 
-console.log(knightMoves([3, 3], [6, 5]));
+console.log(knightMoves([3, 3], [7, 0]));

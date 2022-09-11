@@ -49,13 +49,18 @@ const bfs = (node, end) => {
   } else {
     return bfs(q[0], end);
   }
-  // return node;
 };
 
 const knightMoves = (start, end) => {
   q.push(Node(start));
   let path = bfs(q[0], end);
-  return path;
+  const output = [];
+  output.push(path.value);
+  while (path.prev !== null) {
+    output.push(path.prev.value);
+    path = path.prev;
+  }
+  return output;
 };
 
-console.log(knightMoves([3, 3], [1, 3]));
+console.log(knightMoves([3, 3], [6, 5]));
